@@ -58,11 +58,22 @@
 
     CLASS yltc_create_race IMPLEMENTATION.
       METHOD assert_invalid_race.
-
+        TRY.
+            mo_race = ycl_factory=>get(  )->create_race( iv_num_runner ).
+        ENDTRY.
+        cl_abap_unit_assert=>assert_bound( lx_race ).
+*          EXPORTING
+*            act =
+*           msg =
+*           level            = if_abap_unit_constant=>severity-medium
+*           quit             = if_abap_unit_constant=>quit-test
+*  RECEIVING
+*           assertion_failed =
+*        ).
       ENDMETHOD.
 
       METHOD assert_valid_race.
-
+        mo_race = ycl_factory=>get( )->create_race( iv_num_runner ).
       ENDMETHOD.
 
       METHOD neg_num_runners_valid_race.
